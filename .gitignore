@@ -1,0 +1,43 @@
+# WordPress Files
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/backups/
+
+# Database and backups
+*.sql
+*.sql.gz
+*.sql.zip
+
+# Logs
+error_log
+debug.log
+*.log
+
+# Cache and temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if any)
+node_modules/
+
+# Composer
+/vendor/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
