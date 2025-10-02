@@ -83,26 +83,43 @@ git push origin main
 - Videos: `pup-animado.mp4`, `VIDEO_OFICIAL.mp4`, `VIDEO_OFICIAL2.mp4`
 - Imágenes: Logos, fotos de productos, etc.
 
-## 🎯 Páginas Especiales
+## 🎯 Páginas del Sitio
 
-### Página Principal (Home)
-- Clase CSS: `.puppiesvet-hero`
-- Características: Video animado, gradiente púrpura, botones CTA
-- Footer oculto
+### Páginas Creadas
+1. **Inicio** - Página principal del sitio
+   - Clase CSS: `.puppiesvet-hero`
+   - Características: Video animado, gradiente púrpura, botones CTA
+   - Footer oculto
 
-### Página /ssss/
+2. **Quiénes Somos** - Información sobre PuppiesVet
+   - Presentación de la empresa
+   - Misión y valores
+
+3. **Reclamos y Sugerencias** - Formulario de contacto
+   - Para atención al cliente
+   - Gestión de feedback
+
+### Páginas Especiales
+
+#### Página /ssss/ (Demo/Test)
 - Clase CSS: `.puppiesvet-ssss-hero`
 - Características: Layout 45/55, video lado izquierdo, texto lado derecho
 - Diseño: Más editorial y elegante
 
-## 🛠️ Herramientas y Plugins Usados
+## 🛠️ Plugins Instalados (Local y Producción)
 
-- **WP Pusher**: Deploy automático desde GitHub
-- **Elementor**: Constructor visual de páginas
-- **Astra Theme**: Tema padre
-- **Really Simple SSL**: Seguridad SSL
-- **Wordfence**: Seguridad
-- **Creame WhatsApp Me**: Integración WhatsApp
+### Plugins de Seguridad
+- **Wordfence Security** - Firewall y escaneo de malware
+- **Really Simple SSL** - Configuración automática de SSL/HTTPS
+
+### Plugins de Funcionalidad
+- **Creame WhatsApp Me (JoinChat)** - Botón flotante de WhatsApp
+- **Elementor** - Constructor visual de páginas
+- **WP Pusher** - Deploy automático desde GitHub (solo en producción)
+
+### Tema
+- **Astra Theme** - Tema padre
+- **Astra Child** - Tema hijo personalizado
 
 ## ⚡ Comandos Rápidos
 
@@ -146,13 +163,102 @@ git push origin main
 - WP Pusher solo actualiza cuando detecta cambios en el repositorio GitHub
 - Mantener ambos repositorios sincronizados
 
+## 🚀 Cómo Replicar Plugins y Páginas en Producción
+
+### ⚠️ IMPORTANTE: WP Pusher solo actualiza el TEMA
+WP Pusher NO sincroniza:
+- ❌ Plugins nuevos
+- ❌ Páginas creadas
+- ❌ Posts/Entradas
+- ❌ Configuraciones de WordPress
+- ❌ Base de datos
+
+### 📦 Instalar Plugins en Producción
+
+**Opción 1: Instalación Manual (Recomendado)**
+
+1. Accede al admin de WordPress en producción
+2. Ve a **Plugins → Añadir nuevo**
+3. Busca e instala:
+   - **Wordfence Security**
+   - **Really Simple SSL**
+   - **Creame WhatsApp Me** (buscar "joinchat")
+
+4. Activa cada plugin
+5. Configura según sea necesario
+
+**Opción 2: Copiar Configuración desde Local**
+```bash
+# Exportar lista de plugins activos (desde local)
+wp plugin list --status=active --format=csv > plugins-activos.csv
+
+# Luego en producción, instalar uno por uno con:
+wp plugin install wordfence --activate
+wp plugin install really-simple-ssl --activate
+wp plugin install creame-whatsapp-me --activate
+```
+
+### 📄 Crear Páginas en Producción
+
+**Opción 1: Creación Manual (Recomendado)**
+
+1. En WordPress producción: **Páginas → Añadir nueva**
+
+2. **Página "Inicio"**
+   - Título: Inicio
+   - Usar Elementor para diseñar
+   - Aplicar plantilla con clase `.puppiesvet-hero`
+   - Publicar
+
+3. **Página "Quiénes Somos"**
+   - Título: Quiénes Somos
+   - Agregar contenido sobre la empresa
+   - Publicar
+
+4. **Página "Reclamos y Sugerencias"**
+   - Título: Reclamos y Sugerencias
+   - Agregar formulario de contacto
+   - Publicar
+
+5. **Configurar Página de Inicio**
+   - Ir a **Ajustes → Lectura**
+   - Seleccionar "Una página estática"
+   - Elegir "Inicio" como página principal
+
+**Opción 2: Exportar/Importar con Plugin**
+
+1. En local: Instalar plugin **All-in-One WP Migration**
+2. Ir a **All-in-One WP Migration → Exportar**
+3. Seleccionar solo "Páginas" (desmarcar plugins, tema, etc.)
+4. Descargar archivo
+5. En producción: Importar el archivo
+
+### 🔄 Migración Completa (Alternativa)
+
+Si quieres migrar TODO de local a producción:
+
+**Plugin Duplicator:**
+1. Instalar **Duplicator** en local
+2. Crear paquete completo
+3. Descargar installer.php y archivo.zip
+4. Subir a producción y ejecutar installer
+5. ⚠️ Esto sobrescribe TODO en producción
+
 ## 🐛 Troubleshooting
 
-### Los cambios no aparecen en producción
+### Los cambios del TEMA no aparecen en producción
 1. Verificar que se hizo push a `astra-child-theme`
 2. Revisar WP Pusher en WordPress admin
 3. Limpiar caché del sitio
 4. Hacer "Update" manual desde WP Pusher
+
+### Los PLUGINS no aparecen en producción
+- **Causa**: WP Pusher solo actualiza el tema
+- **Solución**: Instalar plugins manualmente en producción (ver sección arriba)
+
+### Las PÁGINAS no aparecen en producción
+- **Causa**: Las páginas están en la base de datos, no en archivos
+- **Solución**: Crear páginas manualmente en producción (ver sección arriba)
 
 ### Archivos desincronizados
 ```bash
